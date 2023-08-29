@@ -1,0 +1,2 @@
+# ignore secure files
+/fec_voting/__pycache__/keys.cpython-310.pyc
