@@ -1,0 +1,11 @@
+﻿cast_code,description,simplified_grouping
+0,Not a member of the chamber when this vote was taken,n/a
+1,Yea,yea
+2,Paired Yea,yea
+3,Announced Yea,yea
+4,Announced Nay,nay
+5,Paired Nay,nay
+6,Nay,nay
+7,Present (some Congresses),present
+8,Present (some Congresses),present
+9,Not Voting (Abstention),abstain

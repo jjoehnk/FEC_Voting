@@ -1,0 +1,15 @@
+Capstone Wiki 
+
+US Voting Patterns and Funding Sources
+
+
+
+
+
+
+Exploratory Analysis
+
+-- Began process of pulling FEC data through API on one representative to understand available dataset
+
+
+1. Requested APIs from FEC and Congress to pull funding information and bill information from the 117th congress
