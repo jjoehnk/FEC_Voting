@@ -1,2 +1,2 @@
-# FEC_Voting
-General Assembly Capstone 
+# Funding Sources and Congressional Voting Patterns
+*General Assembly Capstone*
