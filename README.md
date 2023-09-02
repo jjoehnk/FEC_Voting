@@ -18,6 +18,8 @@
 
 #### Data Model
 
+![Data Model](/plans_background/models/data_model_9.1.png)
+
 #### Walkthrough
 
 -- Began process of pulling FEC data through API on one representative to understand available dataset
