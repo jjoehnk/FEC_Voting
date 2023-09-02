@@ -38,17 +38,19 @@ Data Dictionaries of all Tables used can be found [here](/plans_background/sourc
         - /v1/committees
     - example codeblock to build dataframes:
 
-`committees_all_pages = []
-for i in range(1,11):
-    committees_rq = rq.get(f'{url}&api_key={api_key_fec}')
+`
+    committees_all_pages = []
+    for i in range(1,11):
+        committees_rq = rq.get(f'{url}&api_key={api_key_fec}')
     
-    committees = committees_rq.json()
-    committees_all_pages.append(committees)
+        committees = committees_rq.json()
+        committees_all_pages.append(committees)
     
-blank_list = []
-for i in range(0,10):
-    blank_list.extend(committees_all_pages[i]['results'] )     
+    blank_list = []
+    for i in range(0,10):
+        blank_list.extend(committees_all_pages[i]['results'] )     
     
-committees_df = pd.DataFrame(blank_list)`
+    committees_df = pd.DataFrame(blank_list)
+`
 
 3. Drop superfluous and null columns, and rename remaining ones for clarity
