@@ -1,3 +1,4 @@
 # ignore secure files
 /fec_voting/__pycache__/keys.cpython-310.pyc
 /fec_voting/keys.py
+/dashboard/tableau_wip_1.twb
