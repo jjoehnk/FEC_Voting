@@ -1,4 +1,9 @@
-capstone references:
+Capstone References
 
+Primary Datasets
+1. Voteview: <https://voteview.com/data>
+2. Dime Plus: <https://data.stanford.edu/dime-plus>
+3. Fec API: <https://api.open.fec.gov/developers/#/>
 
-1. roll call data: <https://voteview.com/data>
+Additional Resources
+1. 
