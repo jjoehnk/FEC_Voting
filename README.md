@@ -35,6 +35,6 @@ There is a wealth of data from the Federal Election Commission on contributions 
 
 #### Data Model
 
-![Data Model](/plans_background/models/data_model_9.1.png)
+![Data Model](/plans_background/models/data_model_9.13.png)
 
 
