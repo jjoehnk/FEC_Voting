@@ -1,0 +1,38 @@
+-- Exploration of Subject Areas for Bills --
+
+
+-- category types (clausen is the most broad --> peltzman --> issue is the most specific)
+SELECT
+    clausen_codes,
+    peltzman_codes,
+    issue_codes,
+    count(bill_number) as qty_bills
+FROM roll_call
+GROUP BY 1, 2, 3
+ORDER BY 4 DESC;
+    -- top category brought forth is 'Foreign and Defense Policy --> Defense Policy Budget
+    
+
+SELECT 
+    rollnumber, 
+    yea_count,
+    nay_count,
+    nominate_mid_1, 
+    nominate_mid_2, 
+    nominate_spread_1, 
+    nominate_spread_2,
+    vote_result,
+    vote_desc,
+    vote_question,
+    clausen_codes,
+    peltzman_codes
+FROM roll_call
+WHERE clausen_codes like '%foreign%and%defense%policy%'
+    AND peltzman_codes like '%defense%policy%budget%'
+    AND nominate_mid_1 != 0;
+
+
+SELECT
+    avg(nominate_mid_1),
+    avg(nominate_mid_2),
+    avg(

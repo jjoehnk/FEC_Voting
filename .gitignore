@@ -2,3 +2,6 @@
 /fec_voting/__pycache__/keys.cpython-310.pyc
 /fec_voting/keys.py
 /dashboard/tableau_wip_1.twb
+/fec_voting/congress.db
+/fec_voting/datasets/standford-tv429pv8839-geojson.json
+

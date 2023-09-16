@@ -1,0 +1,596 @@
+CREATE VIEW can_comms AS
+
+SELECT
+    c.committee_id,
+    m.name member, 
+    m.party, 
+    m.ttl_receipts, 
+    c.name committee,
+    c.affiliated_committee_name org_name, 
+    c.designation_type, 
+    c.organization_type
+FROM members as m
+LEFT JOIN committees as c
+    ON m.candidate_id = c.candidate_ids;
+    
+
+SELECT
+    committee_id,
+    committee_name,
+    round(sum(total), 2) total_spent
+FROM expenditures
+GROUP BY 1, 2
+ORDER BY total DESC;
+
+
+
+
+SELECT
+    issue_codes
+FROM roll_call
+GROUP BY 1
+ORDER BY 1;
+
+
+SELECT
+    clausen_codes
+FROM roll_call
+GROUP BY 1
+ORDER BY 1;
+
+
+SELECT
+    peltzman_codes
+FROM roll_call
+GROUP BY 1
+ORDER BY 1;
+
+------- FINDING COMMITTEES BY SPECIAL INTEREST ---------
+
+
+-- 1. Abortion Policy/Anti-Abortion
+-- Issue code: 'Abortion/Care of deformed newborns', "Women's Equality"
+-- Peltzman code: 'Domestic Social Policy'
+-- Clausen code: 'Civil Liberties'
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%susan%';
+    --- SUSAN B ANTHONY LIST INC		C90011313
+    --- SUSAN B ANTHONY LIST INC		C30000921
+    --- SUSAN B. ANTHONY LIST INC. CANDIDATE FUND (DBA SUSAN B. ANTHONY PRO-LIFE AMERICA CANDIDATE FUND)	SUSAN B. ANTHONY LIST, INC. (DBA SUSAN B. ANTHONY PRO-LIFE AMERICA)	C00332296
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%right%to%life%';
+    --- right to life is split up into committees by state:
+    --- C00235861, C00208439, C00155564, C00172601, C00491894, C00141341, C00248898, C00213355, C00247783, C00157958, C00111278, C00509893, C00484634, C00260331, C00105080, C00117200, 
+    --- C00097196, C00101212, C00141572, C00426528, C00105791, C00221226, C00419242, C00284018, C00173278 
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%pro%life%';
+    --- C00228122, C00164004, C00358051, C00394700, C00525378, C00172361, C00104174, C00531558
+    --- C00525576, C00520122, C00513184, C00513697, C00525675, C00278481
+
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%coalition%life%';
+    --- C00255406
+    
+--- 2. Abortion Policy/Pro-Choice
+-- Issue code: 'Abortion/Care of deformed newborns', "Women's Equality"
+-- Peltzman code: 'Domestic Social Policy'
+-- Clausen code: 'Civil Liberties'
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%planned%parenthood%';
+    -- 71 associated planned parenthood committees all sent to python
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%naral%';
+    -- 5 NARAL committees
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%women%for%choice%';
+    -- C00368332
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%new%york%choice%';
+    -- C00146472
+       
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%reproductive%';
+    -- no reproductive rights committee
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%arizona%list%';
+    -- no arizona list
+     
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%personal%PAC%';
+    -- no personal PAC
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%guttmacher%';
+    -- no guttmacher institute
+    
+
+--- 3. Environmental Conservation
+--- issue code: 'Pollution and Environmental Protection', 'Parks and Conservation', 'Fish and Wildlife'
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%environment%america%';
+    -- C00531814, C90010513, C00442020
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%league%of%conservation%';
+    -- 8 league of conservation voter committees
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%sierra%club%';
+    -- 3 sierra club committees
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%ocean%champions%';
+    -- 3 ocean champions committees
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%natural%resources%defense%';
+    -- none
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%defenders%of%wildlife%';
+    -- 3 committees
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%environmental%action%';
+    -- 4 committees
+    
+
+--- 4. Foreign Policy and Defense
+--- ** difficult category to code, as it hosts a wide array of particular subject matters
+--- issue codes: 'Humanitarian Assistance (foreign)', 'CIA/Spying/Intelligence', 'Communists/Communism/Unamerican Activities'
+--- peltzman: defense policy resolutions, foreign policy resolutions, defense policy budget, foreign policy budget
+--- clausen: 'foreign and defense policy'
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%council%for%a%livable%';
+    -- C90013830, C00387555
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%cuba%';
+    -- C00387720
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%votevets%';
+    --- 3 committees
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%human%rights%';
+    --- C00517060
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%arab%american%';
+    --- C00194225, C00346239
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%move%america%forward%';
+    --- C00454819
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%armenian%';
+    --- C00352054, C00146969
+    
+
+--- 5. Gun Rights
+--- issue codes: 'public safety', 'arms control'
+--- peltzman: 'regulation special interest' 
+--- clausen: 'civil liberties'
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%national%rifle%';
+    --- C90013301, C00053553
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%safari%club%';
+    ---C00356477, C00122101
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%gun%owners%';
+    --- C00279653, C90011693, C00278101
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%gun%rights%';
+    --- C00481200, C00458273
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%shooting%';
+    --- C00322958, C30002158, C00480863
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%gun%collectors%';
+    --- C00322958, C30002158, C00480863
+    
+
+--- 6. Women's Issues - they got 'em
+--- issue codes: 'Women's Equality'
+--- peltzman: 'domestic social policy'
+--- clausen: 'civil liberties'
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%emilys%';
+    --- C00193433
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%independent%women%';
+    --- C90011115, C30001572
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%feminist%';
+    --- C90010646, C00377168
+     
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%maxed%out%';
+    --- C00488387
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%electing%women%';
+    --- C00472894, C00327189
+
+
+--- 7. Pro-Israel
+--- issue code:
+--- peltzman:
+--- clausen:
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%jstreet%';
+    --- C00441949
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%norpac%';
+    --- C00247403
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%national%action%committee%';
+    --- C00147983
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%joint%action%political%affairs%';
+    --- C00139659
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%citizens%organized%';
+    --- C00110585
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%friends%of%israel%';
+    --- C00141747
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%republican%jewish%';
+    --- C90012063, C00345132
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%florida%congressional%';
+    --- C00530378, C00538124
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%american%principles%';
+    --- C00492579, C00527804, C90011552
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%desert%caucus%';
+    --- C00102368
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%protect%heritage%';
+    --- C00135541
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%world%alliance%';
+    --- C00236596
+        
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%sunpac%';
+    --- C00239939
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%maryland%association%';
+    --- C00195024
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%bi-county%';
+    --- C00195024
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%grand%canyon%';
+    --- C00473249, C00489971
+    
+
+--- 8. FOR THE GAYS!!!!
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%human%rights%';
+    --- C90012626, C00508440, C00235853
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%log%cabin%';
+    --- C90012626, C00508440, C00235853
+    --- not 4 the gays
+    
+--- 9. Agriculture/Production
+
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%american%crystal%';
+    --- C00110338
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%altria%';
+    --- C00089136
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%publix%';
+    --- C00400705
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%international%paper%';
+    --- C00034405
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%reyes%';
+    --- C00309237
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%mclane%';
+    --- C00309237
+    
+SELECT
+    name,
+    affiliated_committee_name,
+    committee_id
+FROM committees
+WHERE name LIKE '%%';
+    --- C00309237
