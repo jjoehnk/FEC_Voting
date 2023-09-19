@@ -6,4 +6,4 @@ Primary Datasets
 3. Fec API: <https://api.open.fec.gov/developers/#/>
 
 Additional Resources
-1. 
+1. Open Secrets: <https://www.opensecrets.org/>
